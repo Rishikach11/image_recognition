@@ -10,25 +10,39 @@
     <h1>Upload an Image for Recognition</h1>
     
     <form action="/predict" method="POST" enctype="multipart/form-data">
+        <!-- Image file input -->
         <input type="file" name="file" id="fileInput" onchange="previewImage(event)">
+        
+        <!-- Image preview -->
         <img id="previewImage" alt="Image Preview" style="display:none; margin-top: 10px; max-width: 200px;">
-        <button type="submit">Predict</button>
+        
+        <!-- Predict button -->
+        <button type="submit" class="google-button">Predict</button>
     </form>
 
+    <!-- Display Prediction and Confidence Score -->
     {% if prediction %}
+    <div class="result-container">
         <h2>Prediction: {{ prediction }}</h2>
         <h3>Confidence: {{ confidence }}%</h3>
         <img src="{{ img_src }}" alt="Uploaded Image" width="200">
+    </div>
     {% endif %}
 
-    <h2>Prediction History</h2>
-    <div id="history">
-        {% for item in history %}
-            <div class="history-item">
-                <img src="{{ item.img_src }}" alt="Previous Image" width="100">
-                <p>Prediction: {{ item.prediction }} - Confidence: {{ item.confidence }}%</p>
-            </div>
-        {% endfor %}
+    <!-- History Button -->
+    <button onclick="toggleHistory()" class="google-button history-button">View History</button>
+    
+    <!-- History Section -->
+    <div id="historyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleHistory()">&times;</span>
+            <h2>Prediction History</h2>
+            <ul>
+                {% for item in history %}
+                    <li><strong>{{ item.image_name }}</strong> - Prediction: {{ item.prediction }} ({{ item.confidence }}%)</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 
     <script src="/static/script.js"></script>
@@ -46,6 +60,11 @@
             } else {
                 preview.style.display = 'none';
             }
+        }
+
+        function toggleHistory() {
+            const historyModal = document.getElementById('historyModal');
+            historyModal.style.display = historyModal.style.display === 'block' ? 'none' : 'block';
         }
     </script>
 </body>

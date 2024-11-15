@@ -1,8 +1,7 @@
-// Function to preview the image before submission
+// Image preview function
 function previewImage(event) {
     const preview = document.getElementById('previewImage');
     const file = event.target.files[0];
-
     if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
@@ -15,13 +14,16 @@ function previewImage(event) {
     }
 }
 
-// Function to show the loading spinner
-function showLoading() {
-    const loading = document.getElementById('loading');
-    loading.style.display = 'block';
+// Toggle history modal display
+function toggleHistory() {
+    const historyModal = document.getElementById('historyModal');
+    historyModal.style.display = historyModal.style.display === 'block' ? 'none' : 'block';
 }
 
-// Add event listener to form submission to show the loading spinner
-document.querySelector('form').addEventListener('submit', function() {
-    showLoading();
-});
+// Close modal if clicking outside of it
+window.onclick = function(event) {
+    const historyModal = document.getElementById('historyModal');
+    if (event.target === historyModal) {
+        historyModal.style.display = 'none';
+    }
+}

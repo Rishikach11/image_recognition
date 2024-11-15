@@ -1,53 +1,10 @@
-/* General styling for body */
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f9fafa;
-    font-family: Arial, sans-serif;
-    margin: 0;
-}
+/* Google Colors */
+.google-blue { color: #4285F4; }
+.google-red { color: #EA4335; }
+.google-yellow { color: #FBBC05; }
+.google-green { color: #34A853; }
 
-/* Container for center alignment */
-.container {
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-/* Title styling */
-.title {
-    color: #333;
-    font-size: 2.2em;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-/* Form styling */
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-/* File input styling */
-input[type="file"] {
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 100%;
-    max-width: 300px;
-}
-
-/* Button styling inspired by Google colors */
-.predict-button {
+.google-button {
     padding: 10px 20px;
     background-color: #4285F4; /* Google Blue */
     color: white;
@@ -55,94 +12,52 @@ input[type="file"] {
     border-radius: 4px;
     cursor: pointer;
     font-size: 1em;
-    transition: background-color 0.3s;
 }
 
-.predict-button:hover {
-    background-color: #357ae8;
+.google-button:hover {
+    background-color: #357AE8;
 }
 
-/* Confidence and prediction text styling */
-.confidence-score, .prediction {
-    color: #34A853; /* Google Green */
-    font-size: 1.2em;
-    margin-top: 20px;
-    font-weight: bold;
-}
-
-/* Image preview styling */
-#previewImage {
-    display: block;
-    margin: 20px auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Loading spinner styling */
-#loading {
-    display: none;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #EA4335; /* Google Red */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin: 20px auto;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Tooltip styling */
-.tooltip {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    font-size: 1.5em;
-    color: #FBBC05; /* Google Yellow */
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 200px;
-    background-color: #555;
-    color: #fff;
+/* Result and Confidence Display */
+.result-container {
     text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%; /* Position above the icon */
-    left: 50%;
-    margin-left: -100px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-}
-
-#history {
     margin-top: 20px;
 }
 
-.history-item {
-    display: flex;
+/* History Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
     align-items: center;
-    margin-bottom: 10px;
+    justify-content: center;
 }
 
-.history-item img {
-    margin-right: 10px;
-    border-radius: 4px;
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
-.history-item p {
-    font-size: 1em;
-    color: #333;
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
 }
