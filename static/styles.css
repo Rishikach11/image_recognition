@@ -1,31 +1,42 @@
-/* Center everything and set a light background */
+/* General styling for body */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f2f5;
+    background-color: #f9fafa;
     font-family: Arial, sans-serif;
     margin: 0;
 }
 
-h1 {
-    color: #333;
-    font-size: 2em;
+/* Container for center alignment */
+.container {
     text-align: center;
+    width: 100%;
+    max-width: 500px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
+/* Title styling */
+.title {
+    color: #333;
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Form styling */
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* File input styling */
 input[type="file"] {
     padding: 10px;
     margin-top: 10px;
@@ -35,38 +46,43 @@ input[type="file"] {
     max-width: 300px;
 }
 
-button {
+/* Button styling inspired by Google colors */
+.predict-button {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #4285F4; /* Google Blue */
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 1em;
+    transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #45a049;
+.predict-button:hover {
+    background-color: #357ae8;
 }
 
-h2 {
-    color: #333;
-    text-align: center;
+/* Confidence and prediction text styling */
+.confidence-score, .prediction {
+    color: #34A853; /* Google Green */
+    font-size: 1.2em;
     margin-top: 20px;
+    font-weight: bold;
 }
 
-img {
+/* Image preview styling */
+#previewImage {
     display: block;
     margin: 20px auto;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Loading spinner */
+/* Loading spinner styling */
 #loading {
     display: none;
     border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
+    border-top: 4px solid #EA4335; /* Google Red */
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -79,16 +95,18 @@ img {
     100% { transform: rotate(360deg); }
 }
 
-/* Tooltip */
+/* Tooltip styling */
 .tooltip {
     position: relative;
     display: inline-block;
     cursor: pointer;
+    font-size: 1.5em;
+    color: #FBBC05; /* Google Yellow */
 }
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 180px;
+    width: 200px;
     background-color: #555;
     color: #fff;
     text-align: center;
@@ -98,7 +116,7 @@ img {
     z-index: 1;
     bottom: 125%; /* Position above the icon */
     left: 50%;
-    margin-left: -90px;
+    margin-left: -100px;
     opacity: 0;
     transition: opacity 0.3s;
 }

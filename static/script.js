@@ -1,21 +1,27 @@
-// Show loading spinner
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("form");
-    const loadingSpinner = document.getElementById("loading");
-    const fileInput = document.getElementById("fileInput");
-    const previewImage = document.getElementById("previewImage");
+// Function to preview the image before submission
+function previewImage(event) {
+    const preview = document.getElementById('previewImage');
+    const file = event.target.files[0];
 
-    // Show loading spinner on form submit
-    form.addEventListener("submit", () => {
-        loadingSpinner.style.display = "block";
-    });
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.style.display = 'block';
+            preview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        preview.style.display = 'none';
+    }
+}
 
-    // Image preview
-    fileInput.addEventListener("change", (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            previewImage.src = URL.createObjectURL(file);
-            previewImage.style.display = "block";
-        }
-    });
+// Function to show the loading spinner
+function showLoading() {
+    const loading = document.getElementById('loading');
+    loading.style.display = 'block';
+}
+
+// Add event listener to form submission to show the loading spinner
+document.querySelector('form').addEventListener('submit', function() {
+    showLoading();
 });

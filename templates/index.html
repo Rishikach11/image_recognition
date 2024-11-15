@@ -7,37 +7,39 @@
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>Upload an Image for Recognition</h1>
-    
-    <form action="/predict" method="POST" enctype="multipart/form-data">
-        <!-- Image file input -->
-        <input type="file" name="file" id="fileInput" onchange="previewImage(event)">
+    <div class="container">
+        <h1 class="title">Upload an Image for Recognition</h1>
         
-        <!-- Image preview -->
-        <img id="previewImage" alt="Image Preview" style="display:none; margin-top: 10px; max-width: 200px;">
+        <form action="/predict" method="POST" enctype="multipart/form-data">
+            <!-- Image file input -->
+            <input type="file" name="file" id="fileInput" onchange="previewImage(event)">
+            
+            <!-- Image preview -->
+            <img id="previewImage" alt="Image Preview" style="display:none; margin-top: 10px; max-width: 200px;">
+            
+            <!-- Predict button -->
+            <button type="submit" class="predict-button">Predict</button>
+        </form>
         
-        <!-- Predict button -->
-        <button type="submit">Predict</button>
-    </form>
-    
-    <!-- Confidence score display -->
-    {% if confidence %}
-    <h3>Confidence: {{ confidence }}%</h3>
-    {% endif %}
+        <!-- Confidence score display -->
+        {% if confidence %}
+        <h3 class="confidence-score">Confidence: {{ confidence }}%</h3>
+        {% endif %}
 
-    <!-- Tooltip for instructions -->
-    <div class="tooltip">
-        ?
-        <span class="tooltiptext">Upload an image and click 'Predict' to get a result.</span>
+        <!-- Tooltip for instructions -->
+        <div class="tooltip">
+            ?
+            <span class="tooltiptext">Upload an image and click 'Predict' to get a result.</span>
+        </div>
+
+        <!-- Loading spinner -->
+        <div id="loading"></div>
+
+        {% if prediction %}
+        <h2 class="prediction">Prediction: {{ prediction }}</h2>
+        <img src="{{ img_src }}" alt="Uploaded Image" width="200">
+        {% endif %}
     </div>
-
-    <!-- Loading spinner -->
-    <div id="loading"></div>
-
-    {% if prediction %}
-    <h2>Prediction: {{ prediction }}</h2>
-    <img src="{{ img_src }}" alt="Uploaded Image" width="200">
-    {% endif %}
 
     <script src="/static/script.js"></script>
     <script>
