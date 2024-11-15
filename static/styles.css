@@ -125,3 +125,24 @@ input[type="file"] {
     visibility: visible;
     opacity: 1;
 }
+
+#history {
+    margin-top: 20px;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.history-item img {
+    margin-right: 10px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.history-item p {
+    font-size: 1em;
+    color: #333;
+}

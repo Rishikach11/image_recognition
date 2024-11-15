@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
+from flask_session import Session
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 from werkzeug.utils import secure_filename
@@ -7,12 +8,13 @@ from PIL import Image
 import os
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 
-# Load the trained model
 model = load_model('cnn_cifar10_model.h5')
-
-# Define the class names (same as in the model)
 class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+
 
 # Route to handle the homepage
 @app.route('/')
@@ -24,7 +26,7 @@ def index():
 def predict():
     if 'file' not in request.files:
         return 'No file uploaded', 400
-    
+
     file = request.files['file']
     if file.filename == '':
         return 'No selected file', 400
@@ -42,8 +44,20 @@ def predict():
         # Predict the class
         predictions = model.predict(image)
         predicted_class = class_names[np.argmax(predictions)]
+        confidence = round(100 * np.max(predictions), 2)  # Calculate confidence
 
-        return render_template('index.html', prediction=predicted_class, img_src=filepath)
+        # Store prediction history in session
+        if 'history' not in session:
+            session['history'] = []
+        
+        session['history'].append({
+            'prediction': predicted_class,
+            'confidence': confidence,
+            'img_src': filepath
+        })
+
+        return render_template('index.html', prediction=predicted_class, confidence=confidence, img_src=filepath, history=session['history'])
+
 
 if __name__ == '__main__':
     app.run(debug=True)
