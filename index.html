@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Image Recognition</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Upload an Image for Recognition</h1>
+    
+    <form action="/predict" method="POST" enctype="multipart/form-data">
+        <!-- Image file input -->
+        <input type="file" name="file" id="fileInput" onchange="previewImage(event)">
+        
+        <!-- Image preview -->
+        <img id="previewImage" alt="Image Preview" style="display:none; margin-top: 10px; max-width: 200px;">
+        
+        <!-- Predict button -->
+        <button type="submit">Predict</button>
+    </form>
+    
+    <!-- Confidence score display -->
+    {% if confidence %}
+    <h3>Confidence: {{ confidence }}%</h3>
+    {% endif %}
+
+    <!-- Tooltip for instructions -->
+    <div class="tooltip">
+        ?
+        <span class="tooltiptext">Upload an image and click 'Predict' to get a result.</span>
+    </div>
+
+    <!-- Loading spinner -->
+    <div id="loading"></div>
+
+    {% if prediction %}
+    <h2>Prediction: {{ prediction }}</h2>
+    <img src="{{ img_src }}" alt="Uploaded Image" width="200">
+    {% endif %}
+
+    <script src="/static/script.js"></script>
+    <script>
+        function previewImage(event) {
+            const preview = document.getElementById('previewImage');
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.style.display = 'block';
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
