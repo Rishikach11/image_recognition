@@ -1,63 +1,146 @@
-/* Google Colors */
-.google-blue { color: #4285F4; }
-.google-red { color: #EA4335; }
-.google-yellow { color: #FBBC05; }
-.google-green { color: #34A853; }
+/* Center everything and set a light background */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
 
-.google-button {
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+}
+
+/* Centered heading */
+h1 {
+    color: #4285f4;
+    font-size: 2em;
+    margin: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 300px;
+}
+
+button {
     padding: 10px 20px;
-    background-color: #4285F4; /* Google Blue */
+    background-color: #34a853;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 1em;
+    width: 100%;
+    max-width: 200px;
 }
 
-.google-button:hover {
-    background-color: #357AE8;
+button:hover {
+    background-color: #2c8d42;
 }
 
-/* Result and Confidence Display */
-.result-container {
-    text-align: center;
+/* Prediction confidence styling */
+.prediction-confidence {
+    color: #fbbc05;
+    font-size: 1.2em;
+    margin-top: 15px;
+}
+
+h2 {
+    color: #ea4335;
+    font-size: 1.5em;
     margin-top: 20px;
 }
 
-/* History Modal */
-.modal {
+/* History modal styling */
+#historyModal {
     display: none;
     position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    background-color: white;
     padding: 20px;
     border-radius: 8px;
-    width: 80%;
-    max-width: 500px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    overflow-y: auto;
+    max-height: 80vh;
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+#historyModal h2 {
+    color: #4285f4;
+    font-size: 1.5em;
+}
+
+#historyContent {
+    margin-top: 20px;
+    font-size: 1em;
+    color: #333;
+}
+
+/* Overlay for modal background */
+#modalOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 900;
+}
+
+/* Tooltip */
+.tooltip {
+    position: relative;
+    display: inline-block;
     cursor: pointer;
 }
 
-.close:hover {
-    color: black;
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }
